@@ -1,0 +1,18 @@
+{
+    "name": "jam/php-project",
+    "description": "php teaching project",
+    "autoload": {
+        "psr-4": {
+            "Jam\\PhpProject\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "MrJam18",
+            "email": "mr.jam18@yandex.ru"
+        }
+    ],
+    "require": {
+        "fakerphp/faker": "^1.20"
+    }
+}
