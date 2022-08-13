@@ -6,7 +6,7 @@ namespace Jam\PhpProject\Interfaces;
 use Jam\PhpProject\Common\User;
 use Jam\PhpProject\Common\UUID;
 
-interface IUsersRepository extends IRepository {
+interface IUsersRepository {
     public function save(User $user): void;
     public function get(UUID $UUID): User;
 }
