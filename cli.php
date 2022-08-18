@@ -17,16 +17,21 @@ $faker = Faker\Factory::create();
 $postRepo = new DBPostsRepository($connection);
 $usersRepo = new DBUsersRepository($connection);
 $commentsRepo = new DBCommentsRepository($connection);
+try{
+    $user = new User(UUID::random(), $faker->firstName(), $faker->firstName(), $faker->lastName());
+    $usersRepo->save($user);
+    $post = new Post(UUID::random(), $user->uuid(), $faker->title(), $faker->text() );
+    $postRepo->save($post);
+    $comment = new Comment(UUID::random(), $user->uuid(), $post->getUUID(), $faker->realText());
+    $commentsRepo->save($comment);
+    echo $usersRepo->get($user->uuid());
+    echo $postRepo->get($post->getUUID());
+    echo $commentsRepo->get($comment->getUUID());
+}
+catch (Exception $e) {
+    echo $e;
+}
 
-$user = new User(UUID::random(), $faker->firstName(), $faker->firstName(), $faker->lastName());
-$usersRepo->save($user);
-$post = new Post(UUID::random(), $user->uuid(), $faker->title(), $faker->text() );
-$postRepo->save($post);
-$comment = new Comment(UUID::random(), $user->uuid(), $post->getUUID(), $faker->realText());
-$commentsRepo->save($comment);
-echo $usersRepo->get($user->uuid());
-echo $postRepo->get($post->getUUID());
-echo $commentsRepo->get($comment->getUUID());
 
 
 

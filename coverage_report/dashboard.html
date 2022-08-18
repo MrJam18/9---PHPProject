@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Dashboard for D:\Geekbrains\PHP Advanced\PHP Project\src</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="_css/bootstrap.min.css" rel="stylesheet" type="text/css">
+  <link href="_css/nv.d3.min.css" rel="stylesheet" type="text/css">
+  <link href="_css/style.css" rel="stylesheet" type="text/css">
+  <link href="_css/custom.css" rel="stylesheet" type="text/css">
+ </head>
+ <body>
+  <header>
+   <div class="container-fluid">
+    <div class="row">
+     <div class="col-md-12">
+      <nav aria-label="breadcrumb">
+       <ol class="breadcrumb">
+         <li class="breadcrumb-item"><a href="index.html">D:\Geekbrains\PHP Advanced\PHP Project\src</a></li>
+         <li class="breadcrumb-item active">(Dashboard)</li>
+
+       </ol>
+      </nav>
+     </div>
+    </div>
+   </div>
+  </header>
+  <div class="container-fluid">
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Classes</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="classCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="classComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Commands/CreateUserCommand.php.html#12">Jam\PhpProject\Commands\CreateUserCommand</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Common/Comment.php.html#6">Jam\PhpProject\Common\Comment</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Common/Post.php.html#6">Jam\PhpProject\Common\Post</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Common/UUID.php.html#8">Jam\PhpProject\Common\UUID</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Common/User.php.html#6">Jam\PhpProject\Common\User</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Repositories/DBCommentsRepository.php.html#11">Jam\PhpProject\Repositories\DBCommentsRepository</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Repositories/DBPostsRepository.php.html#11">Jam\PhpProject\Repositories\DBPostsRepository</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Repositories/DBUsersRepository.php.html#11">Jam\PhpProject\Repositories\DBUsersRepository</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Commands/Arguments.php.html#8">Jam\PhpProject\Commands\Arguments</a></td><td class="text-right">50%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Commands/CreateUserCommand.php.html#12">Jam\PhpProject\Commands\CreateUserCommand</a></td><td class="text-right">132</td></tr>
+       <tr><td><a href="Repositories/DBUsersRepository.php.html#11">Jam\PhpProject\Repositories\DBUsersRepository</a></td><td class="text-right">56</td></tr>
+       <tr><td><a href="Common/UUID.php.html#8">Jam\PhpProject\Common\UUID</a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="Repositories/DBCommentsRepository.php.html#11">Jam\PhpProject\Repositories\DBCommentsRepository</a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Repositories/DBPostsRepository.php.html#11">Jam\PhpProject\Repositories\DBPostsRepository</a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Commands/Arguments.php.html#8">Jam\PhpProject\Commands\Arguments</a></td><td class="text-right">16</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Methods</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="methodCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="methodComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Commands/Arguments.php.html#28"><abbr title="Jam\PhpProject\Commands\Arguments::fromArgv">fromArgv</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Commands/CreateUserCommand.php.html#16"><abbr title="Jam\PhpProject\Commands\CreateUserCommand::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Commands/CreateUserCommand.php.html#22"><abbr title="Jam\PhpProject\Commands\CreateUserCommand::handle">handle</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Commands/CreateUserCommand.php.html#39"><abbr title="Jam\PhpProject\Commands\CreateUserCommand::parseRawInput">parseRawInput</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Commands/CreateUserCommand.php.html#62"><abbr title="Jam\PhpProject\Commands\CreateUserCommand::userExists">userExists</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Common/Comment.php.html#8"><abbr title="Jam\PhpProject\Common\Comment::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Common/Comment.php.html#11"><abbr title="Jam\PhpProject\Common\Comment::__toString">__toString</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Common/Comment.php.html#19"><abbr title="Jam\PhpProject\Common\Comment::setAuthorUUID">setAuthorUUID</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Common/Comment.php.html#27"><abbr title="Jam\PhpProject\Common\Comment::setText">setText</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Common/Comment.php.html#35"><abbr title="Jam\PhpProject\Common\Comment::setUUID">setUUID</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Common/Comment.php.html#43"><abbr title="Jam\PhpProject\Common\Comment::setPostUUID">setPostUUID</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Common/Comment.php.html#51"><abbr title="Jam\PhpProject\Common\Comment::getUUID">getUUID</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Common/Comment.php.html#59"><abbr title="Jam\PhpProject\Common\Comment::getAuthorUUID">getAuthorUUID</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Common/Comment.php.html#67"><abbr title="Jam\PhpProject\Common\Comment::getText">getText</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Common/Comment.php.html#75"><abbr title="Jam\PhpProject\Common\Comment::getPostUUID">getPostUUID</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Common/Post.php.html#8"><abbr title="Jam\PhpProject\Common\Post::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Common/Post.php.html#11"><abbr title="Jam\PhpProject\Common\Post::__toString">__toString</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Common/Post.php.html#19"><abbr title="Jam\PhpProject\Common\Post::setUUID">setUUID</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Common/Post.php.html#27"><abbr title="Jam\PhpProject\Common\Post::setText">setText</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Common/Post.php.html#35"><abbr title="Jam\PhpProject\Common\Post::setHeader">setHeader</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Common/Post.php.html#43"><abbr title="Jam\PhpProject\Common\Post::setAuthorUUID">setAuthorUUID</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Common/Post.php.html#51"><abbr title="Jam\PhpProject\Common\Post::getText">getText</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Common/Post.php.html#59"><abbr title="Jam\PhpProject\Common\Post::getHeader">getHeader</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Common/Post.php.html#67"><abbr title="Jam\PhpProject\Common\Post::getAuthorUUID">getAuthorUUID</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Common/Post.php.html#75"><abbr title="Jam\PhpProject\Common\Post::getUUID">getUUID</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Common/UUID.php.html#11"><abbr title="Jam\PhpProject\Common\UUID::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Common/UUID.php.html#30"><abbr title="Jam\PhpProject\Common\UUID::random">random</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Common/UUID.php.html#34"><abbr title="Jam\PhpProject\Common\UUID::__toString">__toString</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Common/UUID.php.html#42"><abbr title="Jam\PhpProject\Common\UUID::setUuidString">setUuidString</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Common/UUID.php.html#50"><abbr title="Jam\PhpProject\Common\UUID::getUuidString">getUuidString</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Common/User.php.html#9"><abbr title="Jam\PhpProject\Common\User::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Common/User.php.html#12"><abbr title="Jam\PhpProject\Common\User::__toString">__toString</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Common/User.php.html#17"><abbr title="Jam\PhpProject\Common\User::uuid">uuid</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Common/User.php.html#25"><abbr title="Jam\PhpProject\Common\User::getName">getName</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Common/User.php.html#33"><abbr title="Jam\PhpProject\Common\User::getUsername">getUsername</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Common/User.php.html#41"><abbr title="Jam\PhpProject\Common\User::getSurname">getSurname</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Common/User.php.html#49"><abbr title="Jam\PhpProject\Common\User::setUuid">setUuid</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Common/User.php.html#57"><abbr title="Jam\PhpProject\Common\User::setName">setName</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Common/User.php.html#65"><abbr title="Jam\PhpProject\Common\User::setSurname">setSurname</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Common/User.php.html#73"><abbr title="Jam\PhpProject\Common\User::setUsername">setUsername</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Repositories/DBCommentsRepository.php.html#13"><abbr title="Jam\PhpProject\Repositories\DBCommentsRepository::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Repositories/DBCommentsRepository.php.html#17"><abbr title="Jam\PhpProject\Repositories\DBCommentsRepository::get">get</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Repositories/DBCommentsRepository.php.html#34"><abbr title="Jam\PhpProject\Repositories\DBCommentsRepository::save">save</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Repositories/DBPostsRepository.php.html#13"><abbr title="Jam\PhpProject\Repositories\DBPostsRepository::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Repositories/DBPostsRepository.php.html#19"><abbr title="Jam\PhpProject\Repositories\DBPostsRepository::get">get</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Repositories/DBPostsRepository.php.html#35"><abbr title="Jam\PhpProject\Repositories\DBPostsRepository::save">save</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Repositories/DBUsersRepository.php.html#13"><abbr title="Jam\PhpProject\Repositories\DBUsersRepository::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Repositories/DBUsersRepository.php.html#19"><abbr title="Jam\PhpProject\Repositories\DBUsersRepository::save">save</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Repositories/DBUsersRepository.php.html#34"><abbr title="Jam\PhpProject\Repositories\DBUsersRepository::get">get</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Repositories/DBUsersRepository.php.html#56"><abbr title="Jam\PhpProject\Repositories\DBUsersRepository::getByUserName">getByUserName</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Repositories/DBUsersRepository.php.html#65"><abbr title="Jam\PhpProject\Repositories\DBUsersRepository::getUser">getUser</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Commands/Arguments.php.html#12"><abbr title="Jam\PhpProject\Commands\Arguments::__construct">__construct</abbr></a></td><td class="text-right">80%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Commands/CreateUserCommand.php.html#39"><abbr title="Jam\PhpProject\Commands\CreateUserCommand::parseRawInput">parseRawInput</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="Commands/Arguments.php.html#28"><abbr title="Jam\PhpProject\Commands\Arguments::fromArgv">fromArgv</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Commands/CreateUserCommand.php.html#22"><abbr title="Jam\PhpProject\Commands\CreateUserCommand::handle">handle</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Commands/CreateUserCommand.php.html#62"><abbr title="Jam\PhpProject\Commands\CreateUserCommand::userExists">userExists</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Common/UUID.php.html#11"><abbr title="Jam\PhpProject\Common\UUID::__construct">__construct</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Repositories/DBCommentsRepository.php.html#17"><abbr title="Jam\PhpProject\Repositories\DBCommentsRepository::get">get</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Repositories/DBPostsRepository.php.html#19"><abbr title="Jam\PhpProject\Repositories\DBPostsRepository::get">get</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Repositories/DBUsersRepository.php.html#34"><abbr title="Jam\PhpProject\Repositories\DBUsersRepository::get">get</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Repositories/DBUsersRepository.php.html#65"><abbr title="Jam\PhpProject\Repositories\DBUsersRepository::getUser">getUser</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Commands/Arguments.php.html#12"><abbr title="Jam\PhpProject\Commands\Arguments::__construct">__construct</abbr></a></td><td class="text-right">3</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <footer>
+    <hr/>
+    <p>
+     <small>Generated by <a href="https://github.com/sebastianbergmann/php-code-coverage" target="_top">php-code-coverage 9.2.15</a> using <a href="https://secure.php.net/" target="_top">PHP 8.1.8</a> and <a href="https://phpunit.de/">PHPUnit 9.5.21</a> at Sat Aug 13 8:17:59 UTC 2022.</small>
+    </p>
+   </footer>
+  </div>
+  <script src="_js/jquery.min.js" type="text/javascript"></script>
+  <script src="_js/d3.min.js" type="text/javascript"></script>
+  <script src="_js/nv.d3.min.js" type="text/javascript"></script>
+  <script type="text/javascript">
+$(document).ready(function() {
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#classCoverageDistribution svg')
+      .datum(getCoverageDistributionData([8,0,0,0,0,0,1,0,0,0,0,5], "Class Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#methodCoverageDistribution svg')
+      .datum(getCoverageDistributionData([51,0,0,0,0,0,0,0,0,1,0,1], "Method Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getCoverageDistributionData(data, label) {
+    var labels = [
+      '0%',
+      '0-10%',
+      '10-20%',
+      '20-30%',
+      '30-40%',
+      '40-50%',
+      '50-60%',
+      '60-70%',
+      '70-80%',
+      '80-90%',
+      '90-100%',
+      '100%'
+    ];
+    var values = [];
+    $.each(labels, function(key) {
+      values.push({x: labels[key], y: data[key]});
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.tooltipContent(function(graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Cyclomatic Complexity');
+
+    d3.select('#classComplexity svg')
+      .datum(getComplexityData([[50,8,"<a href=\"Commands\/Arguments.php.html#8\">Jam\\PhpProject\\Commands\\Arguments<\/a>"],[0,11,"<a href=\"Commands\/CreateUserCommand.php.html#12\">Jam\\PhpProject\\Commands\\CreateUserCommand<\/a>"],[0,10,"<a href=\"Common\/Comment.php.html#6\">Jam\\PhpProject\\Common\\Comment<\/a>"],[0,10,"<a href=\"Common\/Post.php.html#6\">Jam\\PhpProject\\Common\\Post<\/a>"],[0,6,"<a href=\"Common\/UUID.php.html#8\">Jam\\PhpProject\\Common\\UUID<\/a>"],[0,10,"<a href=\"Common\/User.php.html#6\">Jam\\PhpProject\\Common\\User<\/a>"],[100,0,"<a href=\"Exceptions\/ArgumentsException.php.html#5\">Jam\\PhpProject\\Exceptions\\ArgumentsException<\/a>"],[100,0,"<a href=\"Exceptions\/CommandException.php.html#5\">Jam\\PhpProject\\Exceptions\\CommandException<\/a>"],[100,0,"<a href=\"Exceptions\/InvalidArgumentException.php.html#5\">Jam\\PhpProject\\Exceptions\\InvalidArgumentException<\/a>"],[100,0,"<a href=\"Exceptions\/NotFoundException.php.html#7\">Jam\\PhpProject\\Exceptions\\NotFoundException<\/a>"],[100,0,"<a href=\"Exceptions\/UserNotFoundException.php.html#6\">Jam\\PhpProject\\Exceptions\\UserNotFoundException<\/a>"],[0,4,"<a href=\"Repositories\/DBCommentsRepository.php.html#11\">Jam\\PhpProject\\Repositories\\DBCommentsRepository<\/a>"],[0,4,"<a href=\"Repositories\/DBPostsRepository.php.html#11\">Jam\\PhpProject\\Repositories\\DBPostsRepository<\/a>"],[0,7,"<a href=\"Repositories\/DBUsersRepository.php.html#11\">Jam\\PhpProject\\Repositories\\DBUsersRepository<\/a>"]], 'Class Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.tooltipContent(function(graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Method Complexity');
+
+    d3.select('#methodComplexity svg')
+      .datum(getComplexityData([[80,3,"<a href=\"Commands\/Arguments.php.html#12\">Jam\\PhpProject\\Commands\\Arguments::__construct<\/a>"],[0,3,"<a href=\"Commands\/Arguments.php.html#28\">Jam\\PhpProject\\Commands\\Arguments::fromArgv<\/a>"],[100,2,"<a href=\"Commands\/Arguments.php.html#44\">Jam\\PhpProject\\Commands\\Arguments::get<\/a>"],[0,1,"<a href=\"Commands\/CreateUserCommand.php.html#16\">Jam\\PhpProject\\Commands\\CreateUserCommand::__construct<\/a>"],[0,2,"<a href=\"Commands\/CreateUserCommand.php.html#22\">Jam\\PhpProject\\Commands\\CreateUserCommand::handle<\/a>"],[0,6,"<a href=\"Commands\/CreateUserCommand.php.html#39\">Jam\\PhpProject\\Commands\\CreateUserCommand::parseRawInput<\/a>"],[0,2,"<a href=\"Commands\/CreateUserCommand.php.html#62\">Jam\\PhpProject\\Commands\\CreateUserCommand::userExists<\/a>"],[0,1,"<a href=\"Common\/Comment.php.html#8\">Jam\\PhpProject\\Common\\Comment::__construct<\/a>"],[0,1,"<a href=\"Common\/Comment.php.html#11\">Jam\\PhpProject\\Common\\Comment::__toString<\/a>"],[0,1,"<a href=\"Common\/Comment.php.html#19\">Jam\\PhpProject\\Common\\Comment::setAuthorUUID<\/a>"],[0,1,"<a href=\"Common\/Comment.php.html#27\">Jam\\PhpProject\\Common\\Comment::setText<\/a>"],[0,1,"<a href=\"Common\/Comment.php.html#35\">Jam\\PhpProject\\Common\\Comment::setUUID<\/a>"],[0,1,"<a href=\"Common\/Comment.php.html#43\">Jam\\PhpProject\\Common\\Comment::setPostUUID<\/a>"],[0,1,"<a href=\"Common\/Comment.php.html#51\">Jam\\PhpProject\\Common\\Comment::getUUID<\/a>"],[0,1,"<a href=\"Common\/Comment.php.html#59\">Jam\\PhpProject\\Common\\Comment::getAuthorUUID<\/a>"],[0,1,"<a href=\"Common\/Comment.php.html#67\">Jam\\PhpProject\\Common\\Comment::getText<\/a>"],[0,1,"<a href=\"Common\/Comment.php.html#75\">Jam\\PhpProject\\Common\\Comment::getPostUUID<\/a>"],[0,1,"<a href=\"Common\/Post.php.html#8\">Jam\\PhpProject\\Common\\Post::__construct<\/a>"],[0,1,"<a href=\"Common\/Post.php.html#11\">Jam\\PhpProject\\Common\\Post::__toString<\/a>"],[0,1,"<a href=\"Common\/Post.php.html#19\">Jam\\PhpProject\\Common\\Post::setUUID<\/a>"],[0,1,"<a href=\"Common\/Post.php.html#27\">Jam\\PhpProject\\Common\\Post::setText<\/a>"],[0,1,"<a href=\"Common\/Post.php.html#35\">Jam\\PhpProject\\Common\\Post::setHeader<\/a>"],[0,1,"<a href=\"Common\/Post.php.html#43\">Jam\\PhpProject\\Common\\Post::setAuthorUUID<\/a>"],[0,1,"<a href=\"Common\/Post.php.html#51\">Jam\\PhpProject\\Common\\Post::getText<\/a>"],[0,1,"<a href=\"Common\/Post.php.html#59\">Jam\\PhpProject\\Common\\Post::getHeader<\/a>"],[0,1,"<a href=\"Common\/Post.php.html#67\">Jam\\PhpProject\\Common\\Post::getAuthorUUID<\/a>"],[0,1,"<a href=\"Common\/Post.php.html#75\">Jam\\PhpProject\\Common\\Post::getUUID<\/a>"],[0,2,"<a href=\"Common\/UUID.php.html#11\">Jam\\PhpProject\\Common\\UUID::__construct<\/a>"],[0,1,"<a href=\"Common\/UUID.php.html#30\">Jam\\PhpProject\\Common\\UUID::random<\/a>"],[0,1,"<a href=\"Common\/UUID.php.html#34\">Jam\\PhpProject\\Common\\UUID::__toString<\/a>"],[0,1,"<a href=\"Common\/UUID.php.html#42\">Jam\\PhpProject\\Common\\UUID::setUuidString<\/a>"],[0,1,"<a href=\"Common\/UUID.php.html#50\">Jam\\PhpProject\\Common\\UUID::getUuidString<\/a>"],[0,1,"<a href=\"Common\/User.php.html#9\">Jam\\PhpProject\\Common\\User::__construct<\/a>"],[0,1,"<a href=\"Common\/User.php.html#12\">Jam\\PhpProject\\Common\\User::__toString<\/a>"],[0,1,"<a href=\"Common\/User.php.html#17\">Jam\\PhpProject\\Common\\User::uuid<\/a>"],[0,1,"<a href=\"Common\/User.php.html#25\">Jam\\PhpProject\\Common\\User::getName<\/a>"],[0,1,"<a href=\"Common\/User.php.html#33\">Jam\\PhpProject\\Common\\User::getUsername<\/a>"],[0,1,"<a href=\"Common\/User.php.html#41\">Jam\\PhpProject\\Common\\User::getSurname<\/a>"],[0,1,"<a href=\"Common\/User.php.html#49\">Jam\\PhpProject\\Common\\User::setUuid<\/a>"],[0,1,"<a href=\"Common\/User.php.html#57\">Jam\\PhpProject\\Common\\User::setName<\/a>"],[0,1,"<a href=\"Common\/User.php.html#65\">Jam\\PhpProject\\Common\\User::setSurname<\/a>"],[0,1,"<a href=\"Common\/User.php.html#73\">Jam\\PhpProject\\Common\\User::setUsername<\/a>"],[0,1,"<a href=\"Repositories\/DBCommentsRepository.php.html#13\">Jam\\PhpProject\\Repositories\\DBCommentsRepository::__construct<\/a>"],[0,2,"<a href=\"Repositories\/DBCommentsRepository.php.html#17\">Jam\\PhpProject\\Repositories\\DBCommentsRepository::get<\/a>"],[0,1,"<a href=\"Repositories\/DBCommentsRepository.php.html#34\">Jam\\PhpProject\\Repositories\\DBCommentsRepository::save<\/a>"],[0,1,"<a href=\"Repositories\/DBPostsRepository.php.html#13\">Jam\\PhpProject\\Repositories\\DBPostsRepository::__construct<\/a>"],[0,2,"<a href=\"Repositories\/DBPostsRepository.php.html#19\">Jam\\PhpProject\\Repositories\\DBPostsRepository::get<\/a>"],[0,1,"<a href=\"Repositories\/DBPostsRepository.php.html#35\">Jam\\PhpProject\\Repositories\\DBPostsRepository::save<\/a>"],[0,1,"<a href=\"Repositories\/DBUsersRepository.php.html#13\">Jam\\PhpProject\\Repositories\\DBUsersRepository::__construct<\/a>"],[0,1,"<a href=\"Repositories\/DBUsersRepository.php.html#19\">Jam\\PhpProject\\Repositories\\DBUsersRepository::save<\/a>"],[0,2,"<a href=\"Repositories\/DBUsersRepository.php.html#34\">Jam\\PhpProject\\Repositories\\DBUsersRepository::get<\/a>"],[0,1,"<a href=\"Repositories\/DBUsersRepository.php.html#56\">Jam\\PhpProject\\Repositories\\DBUsersRepository::getByUserName<\/a>"],[0,2,"<a href=\"Repositories\/DBUsersRepository.php.html#65\">Jam\\PhpProject\\Repositories\\DBUsersRepository::getUser<\/a>"]], 'Method Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getComplexityData(data, label) {
+    var values = [];
+    $.each(data, function(key) {
+      var value = Math.round(data[key][0]*100) / 100;
+      values.push({
+        x: value,
+        y: data[key][1],
+        class: data[key][2],
+        size: 0.05,
+        shape: 'diamond'
+      });
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+});
+  </script>
+ </body>
+</html>
