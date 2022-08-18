@@ -1,9 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace Jam\PhpProject\Common;
+namespace Jam\PhpProject\DataBase;
 
-class Post
+use Jam\PhpProject\Common\UUID;
+use Jam\PhpProject\Interfaces\IDBObject;
+
+class Post implements IDBObject
 {
     public function __construct(private UUID $UUID, private UUID $authorUUID, private string $header, private string $text)
     {

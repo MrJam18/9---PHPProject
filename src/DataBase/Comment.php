@@ -1,11 +1,14 @@
 <?php
 declare(strict_types=1);
 
-namespace Jam\PhpProject\Common;
+namespace Jam\PhpProject\DataBase;
 
-class Comment
+use Jam\PhpProject\Common\UUID;
+use Jam\PhpProject\Interfaces\IDBObject;
+
+class Comment implements IDBObject
 {
- public function __construct(private UUID $UUID, private UUId $authorUUID, private UUId $postUUID, private string $text)
+ public function __construct(private UUID $UUID, private UUID $authorUUID, private UUID $postUUID, private string $text)
  {
  }
  public function __toString(): string
@@ -14,9 +17,9 @@ class Comment
  }
 
     /**
-     * @param UUId $authorUUID
+     * @param UUID $authorUUID
      */
-    public function setAuthorUUID(UUId $authorUUID): void
+    public function setAuthorUUID(UUID $authorUUID): void
     {
         $this->authorUUID = $authorUUID;
     }
@@ -38,9 +41,9 @@ class Comment
     }
 
     /**
-     * @param UUId $postUUID
+     * @param UUID $postUUID
      */
-    public function setPostUUID(UUId $postUUID): void
+    public function setPostUUID(UUID $postUUID): void
     {
         $this->postUUID = $postUUID;
     }
@@ -54,9 +57,9 @@ class Comment
     }
 
     /**
-     * @return UUId
+     * @return UUID
      */
-    public function getAuthorUUID(): UUId
+    public function getAuthorUUID(): UUID
     {
         return $this->authorUUID;
     }
@@ -70,9 +73,9 @@ class Comment
     }
 
     /**
-     * @return UUId
+     * @return UUID
      */
-    public function getPostUUID(): UUId
+    public function getPostUUID(): UUID
     {
         return $this->postUUID;
     }

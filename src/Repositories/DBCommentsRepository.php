@@ -3,8 +3,9 @@ declare(strict_types=1);
 
 namespace Jam\PhpProject\Repositories;
 
-use Jam\PhpProject\Common\Comment;
 use Jam\PhpProject\Common\UUID;
+use Jam\PhpProject\DataBase\Comment;
+use Jam\PhpProject\Exceptions\InvalidArgumentException;
 use Jam\PhpProject\Exceptions\NotFoundException;
 use Jam\PhpProject\Interfaces\ICommentsRepository;
 
@@ -14,6 +15,10 @@ class DBCommentsRepository implements ICommentsRepository {
     {
     }
 
+    /**
+     * @throws InvalidArgumentException
+     * @throws NotFoundException
+     */
     function get(UUID $UUID): Comment
     {
         $statement = $this->connection->prepare(
@@ -31,7 +36,7 @@ class DBCommentsRepository implements ICommentsRepository {
         return new Comment($UUID, $authorUUID, $postUUID, $result['text']);
     }
 
-    function save(Comment $comment): void
+    function save(Comment $comment): bool
     {
         $statement = $this->connection->prepare(
             'INSERT INTO comments (uuid, author_uuid, post_uuid, text)
@@ -43,6 +48,7 @@ class DBCommentsRepository implements ICommentsRepository {
             'post_uuid' => $comment->getPostUUID(),
             'text' => $comment->getText()
         ]);
+        return true;
     }
 
 }

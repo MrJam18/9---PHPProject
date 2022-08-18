@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace Jam\PhpProject\Commands;
 
-use Jam\PhpProject\Common\User;
 use Jam\PhpProject\Common\UUID;
+use Jam\PhpProject\DataBase\User;
 use Jam\PhpProject\Exceptions\CommandException;
 use Jam\PhpProject\Exceptions\UserNotFoundException;
 use Jam\PhpProject\Interfaces\IUsersRepository;

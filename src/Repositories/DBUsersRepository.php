@@ -3,8 +3,9 @@ declare(strict_types=1);
 
 namespace Jam\PhpProject\Repositories;
 
-use Jam\PhpProject\Common\User;
 use Jam\PhpProject\Common\UUID;
+use Jam\PhpProject\DataBase\User;
+use Jam\PhpProject\Exceptions\InvalidArgumentException;
 use Jam\PhpProject\Exceptions\UserNotFoundException;
 use Jam\PhpProject\Interfaces\IUsersRepository;
 
@@ -16,7 +17,7 @@ class DBUsersRepository implements IUsersRepository
     {
     }
 
-    public function save(User $user): void
+    public function save(User $user): bool
     {
 // Подготавливаем запрос
         $statement = $this->connection->prepare(
@@ -30,7 +31,13 @@ VALUES (:first_name, :last_name, :username, :uuid)'
             ':uuid' => $user->uuid(),
             ':username' => $user->getUsername()
         ]);
+        return true;
     }
+
+    /**
+     * @throws InvalidArgumentException
+     * @throws UserNotFoundException
+     */
     public function get(UUID $uuid): User
     {
         $statement = $this->connection->prepare(
@@ -53,7 +60,11 @@ VALUES (:first_name, :last_name, :username, :uuid)'
             $result['last_name']
         );
     }
-    function getByUserName(string $username)
+
+    /**
+     * @throws UserNotFoundException
+     */
+    function getByUserName(string $username): User
     {
         $statement = $this->connection->prepare(
             'SELECT * FROM users WHERE username = ?'
