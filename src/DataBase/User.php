@@ -17,7 +17,7 @@ class User implements IDBObject
         return  "$this->name $this->surname";
     }
 
-    public function uuid(): UUID
+    public function getUUID(): UUID
     {
         return $this->UUID;
     }
@@ -77,4 +77,6 @@ class User implements IDBObject
     {
         $this->username = $username;
     }
+
+
 }

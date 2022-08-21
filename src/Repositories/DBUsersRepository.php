@@ -28,7 +28,7 @@ VALUES (:first_name, :last_name, :username, :uuid)'
         $statement->execute([
             ':first_name' => $user->getName(),
             ':last_name' => $user->getSurname(),
-            ':uuid' => $user->uuid(),
+            ':uuid' => $user->getUUID(),
             ':username' => $user->getUsername()
         ]);
         return true;

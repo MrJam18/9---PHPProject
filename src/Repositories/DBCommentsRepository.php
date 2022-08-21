@@ -9,10 +9,11 @@ use Jam\PhpProject\Exceptions\InvalidArgumentException;
 use Jam\PhpProject\Exceptions\NotFoundException;
 use Jam\PhpProject\Interfaces\ICommentsRepository;
 
-class DBCommentsRepository implements ICommentsRepository {
+class DBCommentsRepository extends AbstractDBRepo implements ICommentsRepository {
 
-    public function __construct(private \PDO $connection)
+    public function __construct(\PDO $connection)
     {
+        parent::__construct($connection, 'comments');
     }
 
     /**
@@ -21,34 +22,21 @@ class DBCommentsRepository implements ICommentsRepository {
      */
     function get(UUID $UUID): Comment
     {
-        $statement = $this->connection->prepare(
-            'SELECT * FROM comments WHERE uuid = ?'
-        );
-        $statement->execute([ (string)$UUID ]);
-        $result = $statement->fetch();
-        if ($result === false) {
-            throw new NotFoundException(
-                "Cannot get comment: $UUID"
-            );
-        }
+        $result = $this->selectOne(['uuid' => (string)$UUID]);
         $authorUUID = new UUID($result['author_uuid']);
         $postUUID = new UUID($result['post_uuid']);
         return new Comment($UUID, $authorUUID, $postUUID, $result['text']);
     }
 
-    function save(Comment $comment): bool
+    function save(Comment $comment):void
     {
-        $statement = $this->connection->prepare(
-            'INSERT INTO comments (uuid, author_uuid, post_uuid, text)
-                    VALUES (:uuid, :author_uuid, :post_uuid, :text)'
-        );
-        $statement->execute([
+        $this->insert([
             'uuid' => $comment->getUUID(),
             'author_uuid' => $comment->getAuthorUUID(),
             'post_uuid' => $comment->getPostUUID(),
             'text' => $comment->getText()
         ]);
-        return true;
+
     }
 
 }

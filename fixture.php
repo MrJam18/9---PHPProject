@@ -28,3 +28,19 @@ $connection->exec('CREATE TABLE comments (
     FOREIGN KEY (author_uuid) REFERENCES users(uuid),
     FOREIGN KEY (post_uuid) REFERENCES posts(uuid)
 )');
+
+$connection->exec('CREATE TABLE likes (
+    uuid TEXT PRIMARY KEY,
+    author_uuid TEXT,
+    post_uuid TEXT,
+    FOREIGN KEY (author_uuid) REFERENCES users(uuid),
+    FOREIGN KEY (post_uuid) REFERENCES posts(uuid)
+)');
+
+$connection->exec('CREATE TABLE comment_likes (
+    uuid TEXT PRIMARY KEY,
+    author_uuid TEXT,
+    comment_uuid TEXT,
+    FOREIGN KEY (author_uuid) REFERENCES users(uuid),
+    FOREIGN KEY (comment_uuid) REFERENCES comments(uuid)
+)');
