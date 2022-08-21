@@ -8,6 +8,9 @@ use Jam\PhpProject\Exceptions\InvalidArgumentException;
 class UUID
 {
 // Внутри объекта мы храним UUID как строку
+    /**
+     * @throws InvalidArgumentException
+     */
     public function __construct(
         private string $uuidString
     ) {

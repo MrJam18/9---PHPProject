@@ -3,10 +3,13 @@ declare(strict_types=1);
 
 namespace Jam\PhpProject\Repositories;
 
-use Jam\PhpProject\Common\Post;
+use Exception;
 use Jam\PhpProject\Common\UUID;
+use Jam\PhpProject\DataBase\Post;
+use Jam\PhpProject\Exceptions\InvalidArgumentException;
 use Jam\PhpProject\Exceptions\NotFoundException;
 use Jam\PhpProject\Interfaces\IPostsRepository;
+use PDOException;
 
 class DBPostsRepository implements IPostsRepository
 {
@@ -16,6 +19,10 @@ class DBPostsRepository implements IPostsRepository
     {
     }
 
+    /**
+     * @throws NotFoundException
+     * @throws InvalidArgumentException
+     */
     function get(UUID $UUID): Post
     {
         $statement = $this->connection->prepare(
@@ -32,17 +39,31 @@ class DBPostsRepository implements IPostsRepository
         return new Post($UUID, $authorUUID, $result['title'], $result['text']);
     }
 
-    function save(Post $post): void
+    function save(Post $post): bool
     {
         $statement = $this->connection->prepare(
             'INSERT INTO posts (uuid, author_uuid, title, text)
                     VALUES (:uuid, :author_uuid, :title, :text)'
         );
-        $statement->execute([
+        return $statement->execute([
             'uuid' => $post->getUUID(),
             'author_uuid' => $post->getAuthorUUID(),
             'title' => $post->getHeader(),
             'text' => $post->getText()
         ]);
+
+    }
+
+    /**
+     * @throws NotFoundException
+     */
+    function delete(UUID $UUID):void
+    {
+        $statement = $this->connection->prepare('
+          DELETE FROM posts WHERE uuid=?');
+        $response = $statement->execute([(string)$UUID]);
+        if(!$response) throw new PDOException('db query was failed');
+        $deletedCount = $statement->rowCount();
+        if($deletedCount === 0 ) throw new NotFoundException('row with uuid ' . $UUID . ' was not found');
     }
 }

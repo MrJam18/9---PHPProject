@@ -3,21 +3,19 @@ declare(strict_types=1);
 
 namespace Jam\PhpProject\tests\Posts;
 
-use Jam\PhpProject\Common\Post;
 use Jam\PhpProject\Common\UUID;
+use Jam\PhpProject\DataBase\Post;
 use Jam\PhpProject\Exceptions\NotFoundException;
 use Jam\PhpProject\Repositories\DBPostsRepository;
-use Jam\PhpProject\Repositories\tests\MockPostsRepository;
 use PHPUnit\Framework\TestCase;
 
 class RepositoryTest extends TestCase {
 
     function testItSaveCalling():void
     {
-        $repo = new MockPostsRepository();
+        $repo = $this->getSaveMockRepo(true);
         $post = new Post(UUID::random(), UUID::random(), '123', 'one two three');
-        $repo->save($post);
-        $this->assertTrue($repo->getSaveWasCalled());
+        $this->assertTrue($repo->save($post));
     }
 
     function testItFindPostByUuid():void
@@ -51,6 +49,15 @@ class RepositoryTest extends TestCase {
             $statementStub->method('fetch')->willReturn($fetchData);
             return new DBPostsRepository($connectionMock);
         }
+    function getSaveMockRepo(array|bool $executeData):DBPostsRepository
+    {
+        $connectionMock = $this->createStub(\PDO::class);
+        $statementStub = $this->createStub(\PDOStatement::class);
+        $connectionMock->method('prepare')->willReturn($statementStub);
+        $statementStub->method('execute')->willReturn($executeData);
+        return new DBPostsRepository($connectionMock);
+    }
+
 
 
 

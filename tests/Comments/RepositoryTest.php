@@ -3,21 +3,19 @@ declare(strict_types=1);
 
 namespace Jam\PhpProject\tests\Comments;
 
-use Jam\PhpProject\Common\Comment;
 use Jam\PhpProject\Common\UUID;
+use Jam\PhpProject\DataBase\Comment;
 use Jam\PhpProject\Exceptions\NotFoundException;
 use Jam\PhpProject\Repositories\DBCommentsRepository;
-use Jam\PhpProject\Repositories\tests\MockCommentsRepo;
 use PHPUnit\Framework\TestCase;
 
 class RepositoryTest extends TestCase {
 
    function testItSaveCalling()
    {
-       $repo = new MockCommentsRepo();
+       $repo = $this->getSaveMockRepo(true);
        $comment = new Comment(UUID::random(), UUID::random(), UUID::random(), 'justText');
-       $repo->save($comment);
-       $this->assertTrue($repo->getSaveWasCalled());
+       $this->assertTrue($repo->save($comment));
    }
 
    function testItFindCommentByUuid()
@@ -51,4 +49,12 @@ class RepositoryTest extends TestCase {
        $statementStub->method('fetch')->willReturn($fetchData);
        return new DBCommentsRepository($connectionMock);
    }
+    function getSaveMockRepo(array|bool $executeData):DBCommentsRepository
+    {
+        $connectionMock = $this->createStub(\PDO::class);
+        $statementStub = $this->createStub(\PDOStatement::class);
+        $connectionMock->method('prepare')->willReturn($statementStub);
+        $statementStub->method('execute')->willReturn($executeData);
+        return new DBCommentsRepository($connectionMock);
+    }
 }
