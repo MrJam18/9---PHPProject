@@ -4,11 +4,14 @@ declare(strict_types=1);
 namespace Jam\PhpProject\Repositories;
 
 use Jam\PhpProject\Exceptions\NotFoundException;
+use Psr\Log\LoggerInterface;
 
 abstract class AbstractDBRepo
 {
     public function __construct(protected readonly \PDO $connection,
-                                protected string $tableName)
+                                protected string $tableName,
+                                protected LoggerInterface $logger
+    )
     {
     }
     
@@ -41,8 +44,10 @@ abstract class AbstractDBRepo
         $statement->execute($where);
         $result = $statement->fetch();
         if ($result === false) {
+            $columns = implode(', ', array_keys($where));
+            $values = implode(', ', $where);
             throw new NotFoundException(
-                "Cannot found row in table $this->tableName where $whereString");
+                "Cannot found row in table $this->tableName where $columns = $values");
         }
         return $result;
     }
@@ -64,8 +69,10 @@ abstract class AbstractDBRepo
             $result[] = $row;
         }
         if (count($result) === 0) {
+            $columns = implode(', ', array_keys($where));
+            $values = implode(', ', $where);
             throw new NotFoundException(
-                "Cannot found rows in table $this->tableName where $whereString");
+                "Cannot found rows in table $this->tableName where $columns = $values");
         }
         return $result;
     }

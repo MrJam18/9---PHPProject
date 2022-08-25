@@ -8,32 +8,35 @@ use Jam\PhpProject\DataBase\User;
 use Jam\PhpProject\Exceptions\CommandException;
 use Jam\PhpProject\Exceptions\UserNotFoundException;
 use Jam\PhpProject\Interfaces\IUsersRepository;
+use Psr\Log\LoggerInterface;
 
 class CreateUserCommand
 {
-// Команда зависит от контракта репозитория пользователей,
-// а не от конкретной реализации
+
     public function __construct(
-        private IUsersRepository $usersRepository
+        private readonly IUsersRepository $usersRepository,
+        private readonly LoggerInterface $logger
     )
     {
     }
 
     public function handle(array $rawInput): void
     {
+        $this->logger->info("Create user command started");
         $input = $this->parseRawInput($rawInput);
         $username = $input['username'];
-// Проверяем, существует ли пользователь в репозитории
         if ($this->userExists($username)) {
-// Бросаем исключение, если пользователь уже существует
-            throw new CommandException("User already exists: $username");
+            $this->logger->warning("user already exists $username");
+            return;
         }
+        $uuid = UUID::random();
         $this->usersRepository->save(new User(
-            UUID::random(),
+            $uuid,
             $username,
             $input['first_name'],
             $input['last_name']
         ));
+        $this->logger->info("User created: $uuid");
 
     }
     private function parseRawInput(array $rawInput): array

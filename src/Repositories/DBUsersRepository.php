@@ -6,59 +6,55 @@ namespace Jam\PhpProject\Repositories;
 use Jam\PhpProject\Common\UUID;
 use Jam\PhpProject\DataBase\User;
 use Jam\PhpProject\Exceptions\InvalidArgumentException;
+use Jam\PhpProject\Exceptions\NotFoundException;
 use Jam\PhpProject\Exceptions\UserNotFoundException;
 use Jam\PhpProject\Interfaces\IUsersRepository;
+use Psr\Log\LoggerInterface;
 
-class DBUsersRepository implements IUsersRepository
+class DBUsersRepository extends AbstractDBRepo implements IUsersRepository
 {
     public function __construct(
-        private \PDO $connection
+        \PDO $connection,
+        LoggerInterface $logger
     )
     {
+        parent::__construct($connection, 'users', $logger);
     }
 
     public function save(User $user): bool
     {
-// Подготавливаем запрос
-        $statement = $this->connection->prepare(
-            'INSERT INTO users (first_name, last_name, username, uuid)
-VALUES (:first_name, :last_name, :username, :uuid)'
-        );
-// Выполняем запрос с конкретными значениями
-        $statement->execute([
-            ':first_name' => $user->getName(),
-            ':last_name' => $user->getSurname(),
-            ':uuid' => $user->getUUID(),
-            ':username' => $user->getUsername()
+
+        $this->insert([
+            'first_name' => $user->getName(),
+            'last_name' => $user->getSurname(),
+            'uuid' => $user->getUUID(),
+            'username' => $user->getUsername()
         ]);
+        $this->logger->info('user was saved: ' . $user->getUUID());
         return true;
     }
 
     /**
      * @throws InvalidArgumentException
      * @throws UserNotFoundException
+     * @throws NotFoundException
      */
-    public function get(UUID $uuid): User
+    public function get(UUID $UUID): User
     {
-        $statement = $this->connection->prepare(
-            'SELECT * FROM users WHERE uuid = ?'
-        );
-        $statement->execute([
-            (string)$uuid,
-        ]);
-        $result = $statement->fetch();
-// Бросаем исключение, если пользователь не найден
-        if ($result === false) {
-            throw new UserNotFoundException(
-                "Cannot get user: $uuid"
+        try{
+            $result = $this->selectOne(['uuid' => $UUID]);
+            return new User(
+                new UUID($result['uuid']),
+                $result['username'],
+                $result['first_name'],
+                $result['last_name']
             );
         }
-        return new User(
-            new UUID($result['uuid']),
-            $result['username'],
-            $result['first_name'],
-            $result['last_name']
-        );
+        catch (NotFoundException $e){
+            $this->logger->warning('User was not found: ' . $UUID);
+            throw $e;
+        }
+
     }
 
     /**

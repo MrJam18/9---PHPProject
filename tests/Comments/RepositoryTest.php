@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Jam\PhpProject\tests\Comments;
 
+use GeekBrains\Blog\UnitTests\DummyLogger;
 use Jam\PhpProject\Common\UUID;
 use Jam\PhpProject\DataBase\Comment;
 use Jam\PhpProject\Exceptions\NotFoundException;
@@ -15,7 +16,8 @@ class RepositoryTest extends TestCase {
    {
        $repo = $this->getSaveMockRepo(true);
        $comment = new Comment(UUID::random(), UUID::random(), UUID::random(), 'justText');
-       $this->assertTrue($repo->save($comment));
+       $repo->save($comment);
+       $this->assertNull(null);
    }
 
    function testItFindCommentByUuid()
@@ -37,24 +39,26 @@ class RepositoryTest extends TestCase {
         $uuid = UUID::random();
         $repo = $this->getMockRepo(false);
         $this->expectException(NotFoundException::class);
-        $this->expectExceptionMessage("Cannot get comment: $uuid");
+        $this->expectExceptionMessage("Cannot found row in table comments where uuid = $uuid");
         $repo->get($uuid);
     }
 
    function getMockRepo(array|bool $fetchData):DBCommentsRepository
    {
+       $logger = new DummyLogger();
        $connectionMock = $this->createStub(\PDO::class);
        $statementStub = $this->createStub(\PDOStatement::class);
        $connectionMock->method('prepare')->willReturn($statementStub);
        $statementStub->method('fetch')->willReturn($fetchData);
-       return new DBCommentsRepository($connectionMock);
+       return new DBCommentsRepository($connectionMock, $logger);
    }
     function getSaveMockRepo(array|bool $executeData):DBCommentsRepository
     {
+        $logger = new DummyLogger();
         $connectionMock = $this->createStub(\PDO::class);
         $statementStub = $this->createStub(\PDOStatement::class);
         $connectionMock->method('prepare')->willReturn($statementStub);
         $statementStub->method('execute')->willReturn($executeData);
-        return new DBCommentsRepository($connectionMock);
+        return new DBCommentsRepository($connectionMock, $logger);
     }
 }
