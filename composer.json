@@ -6,7 +6,12 @@
             "Jam\\PhpProject\\": "src/"
         }
     },
-    "authors": [
+    "autoload-dev": {
+        "psr-4": {
+            "GeekBrains\\Blog\\UnitTests\\": "tests/"
+        }
+    },
+        "authors": [
         {
             "name": "MrJam18",
             "email": "mr.jam18@yandex.ru"
@@ -15,7 +20,8 @@
     "require": {
         "symfony/polyfill-uuid": "^1.26",
       "ext-pdo": "*",
-        "ext-mbstring": "*"
+        "ext-mbstring": "*",
+        "psr/container": "^2.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.20",

@@ -9,5 +9,5 @@ use Jam\PhpProject\DataBase\Comment;
 interface ICommentsRepository extends IRepository
 {
     function get(UUID $UUID): Comment;
-    function save(Comment $comment): bool;
+    function save(Comment $comment): void;
 }
