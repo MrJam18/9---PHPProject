@@ -8,10 +8,10 @@ use Jam\PhpProject\Exceptions\AuthException;
 use Jam\PhpProject\Exceptions\HTTPException;
 use Jam\PhpProject\Exceptions\UserNotFoundException;
 use Jam\PhpProject\Http\Request;
-use Jam\PhpProject\Interfaces\IIdentification;
+use Jam\PhpProject\Interfaces\IAuthentication;
 use Jam\PhpProject\Interfaces\IUsersRepository;
 
-class JsonBodyUserNameIdentification implements IIdentification
+class JsonBodyUserNameIdentification implements IAuthentication
 {
     public function __construct(
         private readonly IUsersRepository $repository

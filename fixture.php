@@ -44,3 +44,10 @@ $connection->exec('CREATE TABLE comment_likes (
     FOREIGN KEY (author_uuid) REFERENCES users(uuid),
     FOREIGN KEY (comment_uuid) REFERENCES comments(uuid)
 )');
+$connection->exec('CREATE TABLE tokens (
+token TEXT NOT NULL
+CONSTRAINT token_primary_key
+PRIMARY KEY,
+user_uuid TEXT NOT NULL,
+expires_on TEXT NOT NULL
+);');

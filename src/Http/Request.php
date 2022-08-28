@@ -20,13 +20,9 @@ class Request
      */
     public function path(): string
     {
-// В суперглобальном массиве $_SERVER
-// значение URI хранится под ключом REQUEST_URI
         if (!array_key_exists('REQUEST_URI', $this->server)) {
-// Если мы не можем получить URI - бросаем исключение
             throw new HttpException('Cannot get path from the request');
         }
-// Используем встроенную в PHP функцию parse_url
         $components = parse_url($this->server['REQUEST_URI']);
         if (!is_array($components) || !array_key_exists('path', $components)) {
 // Если мы не можем получить путь - бросаем исключение
@@ -35,16 +31,11 @@ class Request
         return $components['path'];
     }
 
-// Метод для получения значения
-// определённого заголовка
     /**
      * @throws HTTPException
      */
     public function header(string $header): string
     {
-        // В суперглобальном массиве $_SERVER
-        // имена заголовков имеют префикс 'HTTP_',
-        // а знаки подчёркивания заменены на минусы
         $headerName = mb_strtoupper("http_". str_replace('-', '_', $header));
         if (!array_key_exists($headerName, $this->server)) {
             // Если нет такого заголовка - бросаем исключение

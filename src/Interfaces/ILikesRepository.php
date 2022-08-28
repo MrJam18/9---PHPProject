@@ -12,4 +12,5 @@ interface ILikesRepository extends IRepository
     function save(Like $like):void;
     function get(UUID $UUID):Like;
     function getByPostUUUID(UUID $UUID):array|bool;
+    function getByPostAndAuthorUUID(UUID $postUUID, UUID $authorUUID): ?Like;
 }

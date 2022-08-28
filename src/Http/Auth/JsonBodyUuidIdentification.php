@@ -9,10 +9,10 @@ use Jam\PhpProject\Exceptions\AuthException;
 use Jam\PhpProject\Exceptions\HTTPException;
 use Jam\PhpProject\Exceptions\InvalidArgumentException;
 use Jam\PhpProject\Http\Request;
-use Jam\PhpProject\Interfaces\IIdentification;
+use Jam\PhpProject\Interfaces\IAuthentication;
 use Jam\PhpProject\Interfaces\IUsersRepository;
 
-class JsonBodyUuidIdentification implements IIdentification
+class JsonBodyUuidIdentification implements IAuthentication
 {
     public function __construct(
         private readonly IUsersRepository $repository

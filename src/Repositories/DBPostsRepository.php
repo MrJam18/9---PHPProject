@@ -42,14 +42,20 @@ class DBPostsRepository extends AbstractDBRepo implements IPostsRepository
 
     function save(Post $post): bool
     {
-        $this->insert([
-            'uuid' => $post->getUUID(),
-            'author_uuid' => $post->getAuthorUUID(),
-            'title' => $post->getHeader(),
-            'text' => $post->getText()
-        ]);
-        $this->logger->info("post was created: " . $post->getUUID());
-        return true;
+        try{
+            $this->insert([
+                'uuid' => $post->getUUID(),
+                'author_uuid' => $post->getAuthorUUID(),
+                'title' => $post->getHeader(),
+                'text' => $post->getText()
+            ]);
+            $this->logger->info("post was created: " . $post->getUUID());
+            return true;
+        }
+        catch (Exception $e) {
+            $this->logger->warning('post dont was saved ' . $post->getUUID(), $e->getTrace());
+        }
+
     }
 
     /**

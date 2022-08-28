@@ -3,13 +3,18 @@ declare(strict_types=1);
 
 use Dotenv\Dotenv;
 use Jam\PhpProject\Container\DIContainer;
-use Jam\PhpProject\Http\Auth\JsonBodyUuidIdentification;
+use Jam\PhpProject\Http\Auth\BearerTokenAuthentication;
+use Jam\PhpProject\Http\Auth\PasswordAuthentication;
+use Jam\PhpProject\Interfaces\IAuthentication;
+use Jam\PhpProject\Interfaces\IAuthTokensRepository;
 use Jam\PhpProject\Interfaces\ICommentLikesRepository;
 use Jam\PhpProject\Interfaces\ICommentsRepository;
-use Jam\PhpProject\Interfaces\IIdentification;
 use Jam\PhpProject\Interfaces\ILikesRepository;
+use Jam\PhpProject\Interfaces\IPasswordAuthentication;
 use Jam\PhpProject\Interfaces\IPostsRepository;
+use Jam\PhpProject\Interfaces\ITokenAuthentication;
 use Jam\PhpProject\Interfaces\IUsersRepository;
+use Jam\PhpProject\Repositories\DBAuthTokensRepository;
 use Jam\PhpProject\Repositories\DBCommentLikesRepo;
 use Jam\PhpProject\Repositories\DBCommentsRepository;
 use Jam\PhpProject\Repositories\DBLikesRepository;
@@ -44,7 +49,13 @@ $container->bind(ICommentsRepository::class,DBCommentsRepository::class);
 $container->bind(ILikesRepository::class,DBLikesRepository::class);
 $container->bind(ICommentLikesRepository::class,DBCommentLikesRepo::class);
 $container->bind(LoggerInterface::class, $logger);
-$container->bind(IIdentification::class, JsonBodyUuidIdentification::class);
+$container->bind(IAuthentication::class, PasswordAuthentication::class);
+$container->bind(IPasswordAuthentication::class, PasswordAuthentication::class);
+$container->bind(IAuthTokensRepository::class, DBAuthTokensRepository::class);
+$container->bind(IPasswordAuthentication::class, PasswordAuthentication::class);
+$container->bind(ITokenAuthentication::class, BearerTokenAuthentication::class);
+
+
 
 
 return $container;
