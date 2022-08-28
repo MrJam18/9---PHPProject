@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Jam\PhpProject\tests\Posts;
 
+use GeekBrains\Blog\UnitTests\DummyLogger;
 use Jam\PhpProject\Common\UUID;
 use Jam\PhpProject\DataBase\Post;
 use Jam\PhpProject\Exceptions\NotFoundException;
@@ -37,25 +38,27 @@ class RepositoryTest extends TestCase {
         $uuid = UUID::random();
         $repo = $this->getMockRepo(false);
         $this->expectException(NotFoundException::class);
-        $this->expectExceptionMessage("Cannot get post: $uuid");
+        $this->expectExceptionMessage("Cannot found row in table posts where uuid = $uuid");
         $repo->get($uuid);
     }
 
     function getMockRepo( array|bool $fetchData):DBPostsRepository
         {
+            $logger = new DummyLogger();
             $connectionMock = $this->createStub(\PDO::class);
             $statementStub = $this->createStub(\PDOStatement::class);
             $connectionMock->method('prepare')->willReturn($statementStub);
             $statementStub->method('fetch')->willReturn($fetchData);
-            return new DBPostsRepository($connectionMock);
+            return new DBPostsRepository($connectionMock, $logger);
         }
     function getSaveMockRepo(array|bool $executeData):DBPostsRepository
     {
+        $logger = new DummyLogger();
         $connectionMock = $this->createStub(\PDO::class);
         $statementStub = $this->createStub(\PDOStatement::class);
         $connectionMock->method('prepare')->willReturn($statementStub);
         $statementStub->method('execute')->willReturn($executeData);
-        return new DBPostsRepository($connectionMock);
+        return new DBPostsRepository($connectionMock, $logger);
     }
 
 

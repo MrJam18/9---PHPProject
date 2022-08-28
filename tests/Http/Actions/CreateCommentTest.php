@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Http\Actions;
 
+use GeekBrains\Blog\UnitTests\DummyLogger;
 use Jam\PhpProject\Exceptions\UserNotFoundException;
 use Jam\PhpProject\Http\Actions\CreateComment;
 use Jam\PhpProject\Http\ErrorResponse;
@@ -81,11 +82,12 @@ class CreateCommentTest extends TestCase
 
     function getMockRepo(array|bool $executeData):DBCommentsRepository
     {
+        $logger = new DummyLogger();
         $connectionMock = $this->createStub(\PDO::class);
         $statementStub = $this->createStub(\PDOStatement::class);
         $connectionMock->method('prepare')->willReturn($statementStub);
         $statementStub->method('execute')->willReturn($executeData);
-        return new DBCommentsRepository($connectionMock);
+        return new DBCommentsRepository($connectionMock, $logger);
     }
 
     function getCreateComment():CreateComment

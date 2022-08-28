@@ -8,31 +8,41 @@ use Jam\PhpProject\DataBase\CommentLike;
 use Jam\PhpProject\Exceptions\InvalidArgumentException;
 use Jam\PhpProject\Exceptions\NotFoundException;
 use Jam\PhpProject\Interfaces\ICommentLikesRepository;
+use Psr\Log\LoggerInterface;
 
 class DBCommentLikesRepo extends AbstractDBRepo implements ICommentLikesRepository
 {
-    public function __construct(\PDO $connection)
+    public function __construct(\PDO $connection, LoggerInterface $logger)
     {
-        parent::__construct($connection, 'comment_likes');
+        parent::__construct($connection, 'comment_likes', $logger);
     }
 
     public function get(UUID $UUID): CommentLike
     {
-        $data = $this->selectOne(['uuid' => $UUID]);
-        return new CommentLike(
-            new UUID($data['uuid']),
-            new UUID($data['comment_uuid']),
-            new UUID($data['author_uuid'])
-        );
+        try{
+            $data = $this->selectOne(['uuid' => $UUID]);
+            return new CommentLike(
+                new UUID($data['uuid']),
+                new UUID($data['comment_uuid']),
+                new UUID($data['author_uuid'])
+            );
+        }
+        catch (NotFoundException $e) {
+            $this->logger->warning("commentLike not found: $UUID");
+            throw $e;
+        }
+
     }
 
     function save(CommentLike $like): void
     {
+
         $this->insert([
             'uuid'=> $like->getUUID(),
             'author_uuid' => $like->getAuthorUUID(),
             'comment_uuid' => $like->getCommentUUID()
         ]);
+        $this->logger->info("commentLike was created: " . $like->getUUID());
     }
 
     /**

@@ -50,4 +50,9 @@ class Arguments
         }
         return $this->arguments[$argument];
     }
+
+    public function getArguments(): array
+    {
+        return $this->arguments;
+    }
 }

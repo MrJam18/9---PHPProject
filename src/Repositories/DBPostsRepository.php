@@ -10,13 +10,16 @@ use Jam\PhpProject\Exceptions\InvalidArgumentException;
 use Jam\PhpProject\Exceptions\NotFoundException;
 use Jam\PhpProject\Interfaces\IPostsRepository;
 use PDOException;
+use Psr\Log\LoggerInterface;
 
-class DBPostsRepository implements IPostsRepository
+class DBPostsRepository extends AbstractDBRepo implements IPostsRepository
 {
     public function __construct(
-        private \PDO $connection
+        \PDO $connection,
+        LoggerInterface $logger
     )
     {
+        parent::__construct($connection, 'posts', $logger);
     }
 
     /**
@@ -25,33 +28,28 @@ class DBPostsRepository implements IPostsRepository
      */
     function get(UUID $UUID): Post
     {
-        $statement = $this->connection->prepare(
-            'SELECT * FROM posts WHERE uuid = ?'
-        );
-        $statement->execute([ (string)$UUID ]);
-        $result = $statement->fetch();
-        if ($result === false) {
-            throw new NotFoundException(
-                "Cannot get post: $UUID"
-            );
+        try{
+            $result = $this->selectOne(['uuid' => $UUID]);
+            $authorUUID = new UUID($result['author_uuid']);
+            return new Post($UUID, $authorUUID, $result['title'], $result['text']);
         }
-        $authorUUID = new UUID($result['author_uuid']);
-        return new Post($UUID, $authorUUID, $result['title'], $result['text']);
+        catch (NotFoundException $e) {
+            $this->logger->warning('Post was not found: ' . $UUID);
+            throw $e;
+        }
+
     }
 
     function save(Post $post): bool
     {
-        $statement = $this->connection->prepare(
-            'INSERT INTO posts (uuid, author_uuid, title, text)
-                    VALUES (:uuid, :author_uuid, :title, :text)'
-        );
-        return $statement->execute([
+        $this->insert([
             'uuid' => $post->getUUID(),
             'author_uuid' => $post->getAuthorUUID(),
             'title' => $post->getHeader(),
             'text' => $post->getText()
         ]);
-
+        $this->logger->info("post was created: " . $post->getUUID());
+        return true;
     }
 
     /**
