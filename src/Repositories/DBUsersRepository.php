@@ -27,6 +27,7 @@ class DBUsersRepository extends AbstractDBRepo implements IUsersRepository
         $this->insert([
             'first_name' => $user->getName(),
             'last_name' => $user->getSurname(),
+            'password' => $user->getHashedPassword(),
             'uuid' => $user->getUUID(),
             'username' => $user->getUsername()
         ]);
@@ -46,6 +47,7 @@ class DBUsersRepository extends AbstractDBRepo implements IUsersRepository
             return new User(
                 new UUID($result['uuid']),
                 $result['username'],
+                $result['password'],
                 $result['first_name'],
                 $result['last_name']
             );
@@ -77,10 +79,10 @@ class DBUsersRepository extends AbstractDBRepo implements IUsersRepository
                 "Cannot find user: $username"
             );
         }
-// Создаём объект пользователя с полем username
         return new User(
             new UUID($result['uuid']),
             $result['username'],
+            $result['password'],
             $result['first_name'],
             $result['last_name']
         );

@@ -7,7 +7,7 @@ namespace Jam\PhpProject\Interfaces;
 use Jam\PhpProject\DataBase\User;
 use Jam\PhpProject\Http\Request;
 
-interface IIdentification
+interface IAuthentication
 {
     public function user(Request $request): User;
 }

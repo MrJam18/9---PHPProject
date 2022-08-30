@@ -25,18 +25,18 @@ class CreateUserCommand
         $this->logger->info("Create user command started");
         $input = $this->parseRawInput($rawInput);
         $username = $input['username'];
+        $password = $input['password'];
         if ($this->userExists($username)) {
             $this->logger->warning("user already exists $username");
             return;
         }
-        $uuid = UUID::random();
-        $this->usersRepository->save(new User(
-            $uuid,
+        $password = hash('sha256', $password);
+        $user = User::createFrom(
             $username,
+            $password,
             $input['first_name'],
-            $input['last_name']
-        ));
-        $this->logger->info("User created: $uuid");
+            $input['last_name']);
+        $this->usersRepository->save($user);
 
     }
     private function parseRawInput(array $rawInput): array
@@ -49,7 +49,7 @@ class CreateUserCommand
             }
             $input[$parts[0]] = $parts[1];
         }
-        foreach (['username', 'first_name', 'last_name'] as $argument) {
+        foreach (['username', 'first_name', 'last_name', 'password'] as $argument) {
             if (!array_key_exists($argument, $input)) {
                 throw new CommandException(
                     "No required argument provided: $argument"
@@ -65,7 +65,6 @@ class CreateUserCommand
     private function userExists(string $username): bool
     {
         try {
-// Пытаемся получить пользователя из репозитория
             $this->usersRepository->getByUsername($username);
         } catch (UserNotFoundException) {
             return false;

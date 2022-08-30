@@ -1,7 +1,6 @@
 <?php
 declare(strict_types=1);
 
-use Jam\PhpProject\Commands\Arguments;
 use Jam\PhpProject\Commands\CreateUserCommand;
 use Psr\Log\LoggerInterface;
 

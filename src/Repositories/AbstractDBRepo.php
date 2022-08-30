@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Jam\PhpProject\Repositories;
 
 use Jam\PhpProject\Exceptions\NotFoundException;
+use PDOStatement;
 use Psr\Log\LoggerInterface;
 
 abstract class AbstractDBRepo
@@ -33,13 +34,9 @@ abstract class AbstractDBRepo
     /**
      * @throws NotFoundException
      */
-    protected function selectOne(array $where, string $select = '*'):array
+    protected function selectOne(array $where, string $select = '*'): array
     {
-        $whereString = '';
-        foreach ($where as $key => $value) {
-            $whereString .= "$key = :$key, ";
-        }
-        $whereString = rtrim($whereString, ', ');
+        $whereString = $this->prepareWhere($where);
         $statement = $this->connection->prepare("SELECT $select FROM $this->tableName WHERE $whereString LIMIT 1");
         $statement->execute($where);
         $result = $statement->fetch();
@@ -57,11 +54,7 @@ abstract class AbstractDBRepo
      */
     protected function select(array $where, string $select = '*'):array
     {
-        $whereString = '';
-        foreach ($where as $key => $value) {
-            $whereString .= "$key = :$key, ";
-        }
-        $whereString = rtrim($whereString, ', ');
+        $whereString = $this->prepareWhere($where);
         $statement =  $this->connection->prepare("SELECT $select FROM $this->tableName WHERE $whereString");
         $statement->execute($where);
         $result = [];
@@ -76,5 +69,51 @@ abstract class AbstractDBRepo
         }
         return $result;
     }
+
+    /**
+     * @throws NotFoundException
+     */
+    protected function update(array $updated, array $where)
+    {
+        $set = '';
+        foreach ($updated as $key => $value) {
+            $set .= "$key = :$key, ";
+    }
+        $set = rtrim($set, ', ');
+        $whereString = '';
+        $whereExecute = [];
+        foreach ($where as $key => $value) {
+            $whereKey = ":where$key";
+            $whereString .= "$key = $whereKey AND ";
+            $whereExecute[$whereKey] = $value;
+        }
+        $whereString = rtrim($whereString, ' AND ');
+        $execute = $whereExecute + $updated;
+        $statement = $this->connection->prepare("UPDATE $this->tableName
+        SET $set WHERE $whereString");
+        $statement->execute($execute);
+        if($statement->rowCount() === 0) {
+            $columns = implode(', ', array_keys($where));
+            $values = implode(', ', $where);
+            throw new NotFoundException("rows in table $this->tableName where $columns = $values dont was updated because don't found");
+        }
+    }
+
+    function destroy(array $where): bool
+    {
+        $whereString = $this->prepareWhere($where);
+        $statement = $this->connection->prepare("DELETE FROM $this->tableName WHERE $whereString");
+        return $statement->execute($where);
+    }
+
+    private function prepareWhere(array $where): string
+    {
+        $whereString = '';
+        foreach ($where as $key => $value) {
+            $whereString .= "$key = :$key AND ";
+        }
+        return rtrim($whereString, ' AND ');
+    }
+
 
 }

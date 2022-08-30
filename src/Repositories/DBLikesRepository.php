@@ -73,6 +73,7 @@ class DBLikesRepository extends AbstractDBRepo implements ILikesRepository
 
     /**
      * @throws NotFoundException
+     * @throws InvalidArgumentException
      */
     function getByPostAndAuthorUUID(UUID $postUUID, UUID $authorUUID): ?Like
     {
@@ -81,12 +82,13 @@ class DBLikesRepository extends AbstractDBRepo implements ILikesRepository
                       'author_uuid' => $authorUUID];
             $data = $this->selectOne($where);
             return new Like(
-                $data['uuid'],
-                $data['post_uuid'],
-                $data['author_uuid']
+                new UUID($data['uuid']),
+                new UUID($data['post_uuid']),
+                new UUID($data['author_uuid'])
             );
         }
         catch (NotFoundException $e) {
+            $this->logger->info($e->getMessage(), $e->getTrace());
             return null;
         }
     }
