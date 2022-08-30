@@ -2,6 +2,11 @@
 declare(strict_types=1);
 
 use Dotenv\Dotenv;
+use Faker\Generator;
+use Faker\Provider\Lorem;
+use Faker\Provider\ru_RU\Internet;
+use Faker\Provider\ru_RU\Person;
+use Faker\Provider\ru_RU\Text;
 use Jam\PhpProject\Container\DIContainer;
 use Jam\PhpProject\Http\Auth\BearerTokenAuthentication;
 use Jam\PhpProject\Http\Auth\PasswordAuthentication;
@@ -29,6 +34,13 @@ Dotenv::createImmutable(__DIR__)->safeLoad();
 $container = new DIContainer();
 $pdo = require_once './sqlite.php';
 $logger = new Logger('blog');
+$faker = new Generator();
+$faker->addProvider(new Person($faker));
+$faker->addProvider(new Text($faker));
+$faker->addProvider(new Internet($faker));
+$faker->addProvider(new Lorem($faker));
+
+
 if($_SERVER['LOG_TO_FILES'] === 'yes')
 $logger->pushHandler(new StreamHandler(
     __DIR__ . '/logs/blog.log'
@@ -54,6 +66,8 @@ $container->bind(IPasswordAuthentication::class, PasswordAuthentication::class);
 $container->bind(IAuthTokensRepository::class, DBAuthTokensRepository::class);
 $container->bind(IPasswordAuthentication::class, PasswordAuthentication::class);
 $container->bind(ITokenAuthentication::class, BearerTokenAuthentication::class);
+$container->bind(Generator::class, $faker);
+
 
 
 

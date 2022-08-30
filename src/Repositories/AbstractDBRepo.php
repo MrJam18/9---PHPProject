@@ -16,7 +16,7 @@ abstract class AbstractDBRepo
     {
     }
     
-    protected function insert(array $insert):bool
+    protected function insert(array $insert): void
     {
         $columns = '';
         $prepares = '';
@@ -28,7 +28,7 @@ abstract class AbstractDBRepo
         $prepares = rtrim($prepares, ', ');
         $query = "INSERT INTO $this->tableName ($columns) VALUES ($prepares)";
         $statement = $this->connection->prepare($query);
-        return $statement->execute($insert);
+        $statement->execute($insert);
     }
 
     /**
@@ -73,7 +73,7 @@ abstract class AbstractDBRepo
     /**
      * @throws NotFoundException
      */
-    protected function update(array $updated, array $where)
+    protected function update(array $updated, array $where): void
     {
         $set = '';
         foreach ($updated as $key => $value) {
@@ -99,11 +99,20 @@ abstract class AbstractDBRepo
         }
     }
 
-    function destroy(array $where): bool
+    /**
+     * @throws NotFoundException
+     */
+    function destroy(array $where): void
     {
         $whereString = $this->prepareWhere($where);
         $statement = $this->connection->prepare("DELETE FROM $this->tableName WHERE $whereString");
-        return $statement->execute($where);
+        $statement->execute($where);
+        if($statement->rowCount() === 0) {
+            $columns = implode(', ', array_keys($where));
+            $values = implode(', ', $where);
+            throw new NotFoundException("rows in table $this->tableName where $columns = $values dont was deleted because don't found");
+        }
+
     }
 
     private function prepareWhere(array $where): string
